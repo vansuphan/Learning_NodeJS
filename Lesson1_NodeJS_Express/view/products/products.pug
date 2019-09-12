@@ -1,0 +1,27 @@
+extends ../layout_common/header.pug
+block header
+    link(rel="stylesheet", href="/styles/products-page.css")
+    h1.my-4 Products
+    div.d-flex.s-form-search-product
+        form.form-inline.my-3(action="/products/search", method="get")
+            input.form-control(type="search", name="q")
+            button.btn.btn-primary(type='search') Search
+    div.content-products
+        each product in products
+            .card
+                img.card-img-top(src=product.image, alt='...')
+                .card-body
+                    h5.card-title= product.name
+                    p.card-text= product.decription
+                    a.btn.btn-primary(href='/cart/add/'+ product.id) Add To Cart
+        else
+            .div There are not values
+    nav(aria-label='Page navigation example')
+        ul.pagination.justify-content-center
+            li.page-item
+                a.page-link( tabindex='-1', aria-disabled='true',href='/products/?page='+ (parseInt(page) - 1)) Previous
+            each number in arrPageNumber
+                li.page-item
+                    a.page-link(href='/products/?page='+ (number + 1))= parseInt(number) + 1
+            li.page-item
+                a.page-link(href='/products/?page='+ (page + 1)) Next

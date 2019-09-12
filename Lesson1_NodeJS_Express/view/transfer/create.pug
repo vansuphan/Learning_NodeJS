@@ -1,0 +1,15 @@
+extends ../layout_common/header.pug
+block header
+    link(rel="stylesheet", href="/styles/formlogin.css")
+    .main-div
+        form(action='/transfer', method="POST")
+            h2.title Transfer
+            .input-group(type="hidden")
+                input#username(type='hidden', name='_csrf', required='', value=csrfToken)
+            .input-group
+                input#username(type='text', name='email', required='')
+                label(for='email') Username
+            .input-group
+                input#password(type='number', name='money', required='')
+                label(for='number') Money
+            button.s-botton Transfer
